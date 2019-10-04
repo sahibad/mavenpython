@@ -12,6 +12,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.apiVersion>6.7.1</sonar.apiVersion>
+        <jdk.min.version>1.8</jdk.min.version>
+        <sonar.language>py</sonar.language>
+		<sonar.sources>.</sonar.sources>
+        
   </properties>
 
   <dependencies>
@@ -27,30 +32,32 @@
     <version>3.2</version>
     <type>pom</type>
 </dependency>
+       <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>${sonar.apiVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-ws</artifactId>
+            <version>${sonar.apiVersion}</version>
+            <scope>compile</scope>
+        </dependency>
   </dependencies>
   <build>
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
-            <executions>
-                <execution>
-                    <configuration>
-                        <executable>python</executable>
-                        <workingDirectory>src/main/resources/</workingDirectory>
-                        <arguments>
-                            <argument>my.py</argument>
-                        </arguments>
-                    </configuration>
-                    <id>python_build</id>
-                    <phase>generate-resources</phase>
-                    <goals>
-                        <goal>exec</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${jdk.min.version}</source>
+                    <target>${jdk.min.version}</target>
+                </configuration>
+            </plugin>
+			
+			            
+        </plugins>
+    </build>
 </project>
